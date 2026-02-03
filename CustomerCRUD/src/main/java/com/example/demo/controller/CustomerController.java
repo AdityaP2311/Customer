@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Customer;
 import com.example.demo.service.CustomerService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class CustomerController {
 
 	@Autowired
