@@ -23,16 +23,21 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@PostMapping("add")
-	public String add(@RequestBody Customer customer) {
-		customerService.add(customer);
-		return "Customer Added Successfully!!!";
+	@PostMapping("/add")
+	public ResponseEntity<?> add(@RequestBody Customer customer) {
+		try {
+			customerService.add(customer);
+			return ResponseEntity.ok("Customer Added Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(500).body(e.getMessage());
+		}
 	}
 
-	@PostMapping("addAll")
-	public String addAll(@RequestBody List<Customer> list) {
+	@PostMapping("/addAll")
+	public ResponseEntity<?> addAll(@RequestBody List<Customer> list) {
 		customerService.addAll(list);
-		return "Customers Added Successfully!!!";
+		return ResponseEntity.ok("Customers Added Successfully");
 	}
 
 	@GetMapping("display")
@@ -40,13 +45,13 @@ public class CustomerController {
 		return customerService.display();
 	}
 
-	@DeleteMapping("delete/{id}")
-	public Customer delete(Integer id) {
+	@DeleteMapping("/delete/{id}")
+	public Customer delete(@PathVariable Integer id) {
 		return customerService.delete(id);
 	}
 
-	@PostMapping("search/{id}")
-	public Customer search(Integer id) {
+	@PostMapping("/search/{id}")
+	public Customer search(@PathVariable Integer id) {
 		return customerService.search(id);
 	}
 
