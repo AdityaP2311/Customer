@@ -14,7 +14,7 @@ public interface CustomerService {
 
 	Customer delete(Integer id);
 
-	void update(Customer customer, Integer id);
+	Customer update(Customer customer, Integer id);
 
 	Customer search(Integer id);
 

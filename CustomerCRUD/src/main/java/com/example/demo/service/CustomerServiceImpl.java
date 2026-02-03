@@ -85,12 +85,19 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void update(Customer customer, Integer id) {
-		if (!customerRepository.existsById(id))
-			throw new IdNotFoundException("Id not Found!!");
+	public Customer update(Customer customer, Integer id) {
 
-		customer.setId(id);
-		customerRepository.save(customer);
+	    Customer dbCustomer = customerRepository.findById(id)
+	        .orElseThrow(() -> new IdNotFoundException("Customer not found with id: " + id));
+
+	    validCustomer(customer);
+
+	    dbCustomer.setName(customer.getName());
+	    dbCustomer.setMob(customer.getMob());
+	    dbCustomer.setAddress(customer.getAddress());
+	    dbCustomer.setSalary(customer.getSalary());
+
+	    return customerRepository.save(dbCustomer);
 	}
 
 	@Override
