@@ -39,14 +39,14 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new InvalidMobileNumber("Mobile number must start with +91");
 		}
 
-		if (mob.charAt(3) < '6') {
-			throw new InvalidMobileNumber("Invalid Indian mobile number");
+		if (mob.charAt(3) < '6' || mob.charAt(3) > '9') {
+		    throw new InvalidMobileNumber("Invalid Indian mobile number");
 		}
 
-		for (int i = 0; i < mob.length(); i++) {
-			if (!Character.isDigit(mob.charAt(i))) {
-				throw new InvalidMobileNumber("Only digits are allowed after +91");
-			}
+		for (int i = 3; i < mob.length(); i++) {
+		    if (!Character.isDigit(mob.charAt(i))) {
+		        throw new InvalidMobileNumber("Only digits are allowed after +91");
+		    }
 		}
 
 		if (customerRepository.existsByMob(mob)) {
