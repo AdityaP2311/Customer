@@ -91,12 +91,7 @@ public class CustomerServiceImpl implements CustomerService {
 	        .orElseThrow(() -> new IdNotFoundException("Customer not found with id: " + id));
 
 	    validCustomer(customer);
-
-	    dbCustomer.setName(customer.getName());
-	    dbCustomer.setMob(customer.getMob());
-	    dbCustomer.setAddress(customer.getAddress());
-	    dbCustomer.setSalary(customer.getSalary());
-
+	    dbCustomer.setId(id);
 	    return customerRepository.save(dbCustomer);
 	}
 
